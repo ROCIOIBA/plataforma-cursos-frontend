@@ -78,7 +78,8 @@ public/
   index.html        # HTML base
 
 🌐 Deploy
-(Se completa cuando hagamos el deploy en Render.)
+https://plataforma-cursos-frontend.onrender.com
+
 
 Ejemplo:
 
