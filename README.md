@@ -1,16 +1,92 @@
-# React + Vite
+📘 Plataforma de Cursos – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación frontend desarrollada con React y Vite para consumir la API de la Plataforma de Cursos. Permite a los usuarios visualizar cursos, registrarse, iniciar sesión y navegar por la plataforma de manera intuitiva y responsiva.
 
-Currently, two official plugins are available:
+🚀 Tecnologías utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+React
 
-## React Compiler
+Vite
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+React Router
 
-## Expanding the ESLint configuration
+CSS / Tailwind / estilos propios (adaptar según tu proyecto)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Fetch / Axios para consumir la API
+
+Node + Express (backend conectado)
+
+📦 Instalación y ejecución
+
+1. Clonar el repositorio
+bash
+git clone https://github.com/ROCIOIBA/plataforma-cursos-frontend.git
+
+2. Instalar dependencias
+bash
+npm install
+
+3. Configurar variables de entorno
+Crear un archivo .env en la raíz del proyecto:
+
+Código
+VITE_API_URL=http://localhost:3000
+(Una vez que el backend esté desplegado, reemplazar por la URL pública de Render.)
+
+4. Ejecutar el proyecto
+
+bash
+npm run dev
+La aplicación estará disponible en:
+
+Código
+http://localhost:5173
+
+🧩 Funcionalidades principales
+
+Registro de usuarios
+
+Inicio de sesión
+
+Visualización de cursos
+
+Navegación por secciones
+
+Consumo de API REST
+
+Manejo de estados y rutas
+
+🔗 Conexión con el backend
+
+Este frontend consume la API desarrollada en:
+
+Código
+https://github.com/ROCIOIBA/plataforma-cursos-backend
+(Agregar URL del deploy cuando esté lista.)
+
+📁 Estructura del proyecto
+
+Código
+src/
+  components/       # Componentes reutilizables (Navbar, Footer, etc.)
+  pages/            # Vistas principales (Home, Cursos, Login, etc.)
+  services/         # Funciones para consumir la API
+  hooks/            # Custom hooks si usás alguno
+  App.jsx           # Componente raíz
+  main.jsx          # Punto de entrada
+public/
+  index.html        # HTML base
+
+🌐 Deploy
+(Se completa cuando hagamos el deploy en Render.)
+
+Ejemplo:
+
+Código
+https://plataforma-cursos-frontend.onrender.com
+
+
+
+
+# Plataforma de Cursos – Frontend
+Proyecto desarrollado por **Rocío Ibañez**, Backend .
