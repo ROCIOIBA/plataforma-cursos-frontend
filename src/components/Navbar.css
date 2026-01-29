@@ -1,0 +1,39 @@
+/* Contenedor de botones de login/register */
+.navbar-auth {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* ← SEPARA LOS BOTONES */
+}
+
+/* Botón Registrarse */
+.btn-register {
+  background: #4f46e5;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-register:hover {
+  background: #4338ca;
+}
+
+/* Botón Iniciar sesión */
+.btn-login {
+  background: white;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-login:hover {
+  border-color: #999;
+}
