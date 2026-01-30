@@ -15,7 +15,7 @@ import RutaPrivada from "./components/RutaPrivada";
 import Cursos from "./pages/Cursos";
 
 function App() {
-  return (
+  return (  
     <BrowserRouter>
       <Navbar />
 

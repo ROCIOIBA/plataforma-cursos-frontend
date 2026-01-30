@@ -81,12 +81,6 @@ public/
 https://plataforma-cursos-frontend.onrender.com
 
 
-Ejemplo:
-
-Código
-https://plataforma-cursos-frontend.onrender.com
-
-
 
 
 # Plataforma de Cursos – Frontend
