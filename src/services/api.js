@@ -1,9 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  //baseURL: "http://localhost:3000",
-  baseURL: "https://plataforma-cursos-backend-4o3v.onrender.com/api/cursos"
-
+  baseURL: "https://plataforma-cursos-backend-4o3v.onrender.com",
 });
 
 export default api;
