@@ -23,7 +23,7 @@ export default function Login() {
 
     try {
       // Ruta correcta según tu backend
-      const res = await api.post("/api/usuarios/login", form);
+      const res = await api.post("/usuarios/login", form);
 
       // Guardar usuario y token
       localStorage.setItem("usuario", JSON.stringify(res.data.usuario));

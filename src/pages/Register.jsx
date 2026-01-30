@@ -21,7 +21,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      await api.post("/api/usuarios/registro", form);
+      await api.post("/usuarios/registro", form);
 
       setMensaje("Registro exitoso. Redirigiendo...");
 
