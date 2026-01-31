@@ -6,7 +6,7 @@ const api = axios.create({
 
   // RENDER
   baseURL: "https://plataforma-cursos-backend-4o3v.onrender.com/api",
-withCredentials: true,
+  withCredentials: true,
   
 });
 
