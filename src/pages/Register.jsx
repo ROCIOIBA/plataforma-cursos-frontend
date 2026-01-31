@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import api from "../services/api"; // ⭐ IMPORTANTE
 
-// Normaliza categorías
 function normalizarCategoria(cat) {
   if (!cat) return "";
   return cat
@@ -9,7 +9,6 @@ function normalizarCategoria(cat) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-// Imágenes por categoría
 const imagenesPorCategoria = {
   programacion: "https://images.unsplash.com/photo-1518770660439-4636190af475",
   diseno: "https://images.unsplash.com/photo-1503602642458-232111445657",
@@ -27,11 +26,11 @@ export default function MisCursos() {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    fetch("http://localhost:3000/api/inscripciones/mis-cursos", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => setCursos(data))
+    api
+      .get("/inscripciones/mis-cursos", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => setCursos(res.data))
       .catch((err) => console.error("Error cargando mis cursos:", err));
   }, []);
 
