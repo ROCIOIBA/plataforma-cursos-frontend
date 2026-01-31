@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../services/api"; // ⭐ IMPORTANTE
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -10,13 +11,10 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/api/usuarios/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    api.post("/usuarios/login", { email, password })
+      .then((res) => {
+        const data = res.data;
+
         if (data.token) {
           localStorage.setItem("token", data.token);
           localStorage.setItem("user", JSON.stringify(data.usuario));
