@@ -1,76 +1,54 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../services/api";
-import Toast from "../components/Toast";
 
 export default function Login() {
-  const [form, setForm] = useState({ email: "", password: "" });
-  const [toast, setToast] = useState({ mensaje: "", tipo: "" });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!form.email || !form.password) {
-      setToast({ mensaje: "Completá todos los campos", tipo: "error" });
-      setTimeout(() => setToast({ mensaje: "", tipo: "" }), 3000);
-      return;
-    }
-
-    try {
-      // Ruta correcta según tu backend
-      const res = await api.post("/usuarios/login", form);
-
-      // Guardar usuario y token
-      localStorage.setItem("usuario", JSON.stringify(res.data.usuario));
-      localStorage.setItem("token", res.data.token);
-
-      // Mensaje de éxito
-      setToast({ mensaje: "Inicio de sesión exitoso", tipo: "success" });
-
-      // Redirigir
-      setTimeout(() => {
-        setToast({ mensaje: "", tipo: "" });
-        navigate("/mis-cursos");
-      }, 1500);
-
-    } catch (error) {
-      console.error("Error al iniciar sesión:", error);
-
-      setToast({ mensaje: "Credenciales incorrectas", tipo: "error" });
-      setTimeout(() => setToast({ mensaje: "", tipo: "" }), 3000);
-    }
+    fetch("http://localhost:3000/api/usuarios/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify(data.usuario));
+          navigate("/");
+        } else {
+          alert("Credenciales incorrectas");
+        }
+      })
+      .catch((err) => console.error("Error en login:", err));
   };
 
   return (
-    <div className="form-container">
-      <h2>Iniciar sesión</h2>
+    <div className="form-auth">
+      <h1>Iniciar sesión</h1>
 
       <form onSubmit={handleSubmit}>
         <input
           type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
+          placeholder="Correo"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
           type="password"
-          name="password"
           placeholder="Contraseña"
-          value={form.password}
-          onChange={handleChange}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
 
         <button type="submit">Ingresar</button>
       </form>
-
-      <Toast mensaje={toast.mensaje} tipo={toast.tipo} />
     </div>
   );
 }

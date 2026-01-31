@@ -1,38 +1,43 @@
-import { Link } from "react-router-dom";
-import "./Navbar.css";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Navbar({ usuario, cerrarSesion }) {
+export default function Navbar() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
   return (
-    <nav className="nav">
+    <nav className="navbar">
+      <Link to="/" className="logo">Aprende a Programar</Link>
 
-      {/* LOGO */}
-      <div className="logo">
-        <Link to="/">Aprende a Programar</Link>
-      </div>
-
-      {/* LINKS CENTRALES */}
-      <div className="navbar-links">
+      <div className="nav-links">
         <Link to="/cursos">Cursos</Link>
-      </div>
 
-      {/* DERECHA: LOGIN / REGISTER / AVATAR / LOGOUT */}
-      <div className="navbar-auth">
-
-        {!usuario ? (
+        {token ? (
           <>
-            <Link to="/register" className="btn-register">Registrarse</Link>
-            <Link to="/login" className="btn-login">Iniciar sesión</Link>
+            <Link to="/mis-cursos">Mis Cursos</Link>
+            <button onClick={handleLogout} className="btn-logout">
+              Cerrar sesión
+            </button>
           </>
         ) : (
-          <div className="usuario-info">
-            <span className="saludo">Hola, {usuario.nombre}</span>
-            <div className="avatar">{usuario.nombre[0].toUpperCase()}</div>
-            <span className="logout" onClick={cerrarSesion}>Cerrar sesión</span>
-          </div>
+          <>
+            <Link to="/login">Iniciar sesión</Link>
+            <Link to="/register">Registrarse</Link>
+          </>
         )}
-
       </div>
 
+      <button
+        className="btn-darkmode"
+        onClick={() => document.body.classList.toggle("dark")}
+      >
+        🌙
+      </button>
     </nav>
   );
 }
