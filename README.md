@@ -78,7 +78,8 @@ public/
   index.html        # HTML base
 
 🌐 Deploy
-https://plataforma-cursos-frontend.onrender.com
+https://plataforma-cursos-frontend-kfm6.onrender.com
+
 
 
 
