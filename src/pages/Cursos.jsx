@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import api from "../services/api"; // ⭐ IMPORTANTE
 
-// Función para normalizar categorías (sin acentos y en minúsculas)
 function normalizarCategoria(cat) {
   if (!cat) return "";
   return cat
     .toLowerCase()
-    .normalize("NFD") // separa acentos
-    .replace(/[\u0300-\u036f]/g, ""); // elimina acentos
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 }
 
 const imagenesPorCategoria = {
@@ -25,9 +25,9 @@ export default function Cursos() {
   const [cursos, setCursos] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/cursos")
-      .then((res) => res.json())
-      .then((data) => setCursos(data))
+    api
+      .get("/cursos")
+      .then((res) => setCursos(res.data))
       .catch((err) => console.error("Error cargando cursos:", err));
   }, []);
 
