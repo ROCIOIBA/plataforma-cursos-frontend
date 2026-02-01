@@ -28,7 +28,7 @@ export default function Navbar() {
         <Link to="/" className="logo">Cursos Online</Link>
       </div>
 
-      <div className="nav-right">
+      <div className="nav-links">
         <Link to="/cursos">Cursos</Link>
 
       {user ? (
