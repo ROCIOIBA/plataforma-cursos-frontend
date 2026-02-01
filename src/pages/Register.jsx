@@ -23,17 +23,8 @@ const imagenesPorCategoria = {
 export default function MisCursos() {
   const [cursos, setCursos] = useState([]);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    api
-      .get("/inscripciones/mis-cursos", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => setCursos(res.data))
-      .catch((err) => console.error("Error cargando mis cursos:", err));
-  }, []);
-
+  
+useEffect(() => { api .get("/inscripciones/mis-cursos") .then((res) => setCursos(res.data)) .catch((err) => console.error("Error cargando mis cursos:", err)); }, []);
   return (
     <div className="cursos-container">
       <h1>Mis cursos</h1>
