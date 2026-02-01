@@ -1,33 +1,52 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";   // ⭐ FALTABA ESTO
-import Dashboard from "./pages/Dashboard";
 
-import Home from "./pages/Home";
-import Cursos from "./pages/Cursos";
-import CursoDetalle from "./pages/CursoDetalle";
-import MisCursos from "./pages/MisCursos";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+export default function Navbar() {
+  const [user, setUser] = useState(null);
+ console.log("Usuario guardado:", user);
 
-export default function App() {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/");
+  };
+
   return (
-    <Router>
-      <Navbar />
+    <nav className="navbar">
+      <div className="nav-left">
+        <Link to="/" className="logo">Cursos Online</Link>
+      </div>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cursos" element={<Cursos />} />
-        <Route path="/curso/:id" element={<CursoDetalle />} />
-        <Route path="/mis-cursos" element={<MisCursos />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+      <div className="nav-right">
+        <Link to="/cursos">Cursos</Link>
 
-      </Routes>
+      {user ? (
+  <>
+    <span className="saludo">Hola, {user.nombre}</span>
+    <Link to="/mis-cursos">Mis cursos</Link>
+    <button onClick={handleLogout} className="btn-logout">
+      Cerrar sesión
+    </button>
+  </>
+) : (
+  <>
+    <Link to="/login">Ingresar</Link>
+    <Link to="/register">Registrar</Link>
+  </>
+)}
 
-      <Footer />   {/* Ahora sí funciona */}
-    </Router>
+      </div>
+    </nav>
   );
 }
