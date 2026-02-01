@@ -15,14 +15,15 @@ export default function Login() {
       .then((res) => {
         const data = res.data;
 
-        if (data.token) {
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("user", JSON.stringify(data.usuario));
-          navigate("/");
+        if (data.usuario) {
+        localStorage.setItem("user", JSON.stringify(data.usuario));
+            navigate("/");
         } else {
-          alert("Credenciales incorrectas");
-        }
+        alert("Credenciales incorrectas");
+}
+
       })
+       
       .catch((err) => console.error("Error en login:", err));
   };
 
