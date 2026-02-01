@@ -1,43 +1,33 @@
-import { Link, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-export default function Navbar() {
-  const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";   // ⭐ FALTABA ESTO
+import Dashboard from "./pages/Dashboard";
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
+import Home from "./pages/Home";
+import Cursos from "./pages/Cursos";
+import CursoDetalle from "./pages/CursoDetalle";
+import MisCursos from "./pages/MisCursos";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
+export default function App() {
   return (
-    <nav className="navbar">
-      <Link to="/" className="logo">Aprende a Programar</Link>
+    <Router>
+      <Navbar />
 
-      <div className="nav-links">
-        <Link to="/cursos">Cursos</Link>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cursos" element={<Cursos />} />
+        <Route path="/curso/:id" element={<CursoDetalle />} />
+        <Route path="/mis-cursos" element={<MisCursos />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
-        {token ? (
-          <>
-            <Link to="/mis-cursos">Mis Cursos</Link>
-            <button onClick={handleLogout} className="btn-logout">
-              Cerrar sesión
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login">Iniciar sesión</Link>
-            <Link to="/register">Registrarse</Link>
-          </>
-        )}
-      </div>
+      </Routes>
 
-      <button
-        className="btn-darkmode"
-        onClick={() => document.body.classList.toggle("dark")}
-      >
-        🌙
-      </button>
-    </nav>
+      <Footer />   {/* Ahora sí funciona */}
+    </Router>
   );
 }

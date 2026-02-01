@@ -210,3 +210,18 @@ body.dark .form-auth {
 .dashboard h2 {
   margin-top: 30px;
 }
+.mensaje-exito {
+  background: #4caf50;
+  color: white;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
