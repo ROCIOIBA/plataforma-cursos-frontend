@@ -1,61 +1,71 @@
-import { useEffect, useState } from "react";
-import api from "../services/api"; // ⭐ IMPORTANTE
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../services/api";
 
-function normalizarCategoria(cat) {
-  if (!cat) return "";
-  return cat
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-}
+export default function Register() {
+  const [nombre, setNombre] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [mensaje, setMensaje] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-const imagenesPorCategoria = {
-  programacion: "https://images.unsplash.com/photo-1518770660439-4636190af475",
-  diseno: "https://images.unsplash.com/photo-1503602642458-232111445657",
-  diseño: "https://images.unsplash.com/photo-1503602642458-232111445657",
-  negocios: "https://images.unsplash.com/photo-1556761175-4b46a572b786",
-  marketing: "https://images.unsplash.com/photo-1556761175-4b46a572b786",
-  ingles: "https://images.unsplash.com/photo-1529070538774-1843cb3265df",
-  data: "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
-  ciberseguridad: "https://images.unsplash.com/photo-1555949963-ff9fe0c9a3d1",
-};
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setMensaje("");
+    setError("");
 
-export default function MisCursos() {
-  const [cursos, setCursos] = useState([]);
+    try {
+      const res = await api.post("/usuarios/register", {
+        nombre,
+        email,
+        password,
+      });
 
-  useEffect(() => {
-    api
-      .get("/inscripciones/mis-cursos")
-      .then((res) => setCursos(res.data))
-      .catch((err) => console.error("Error cargando mis cursos:", err));
-  }, []);
+      setMensaje("Registro exitoso. Ahora podés iniciar sesión.");
+      setTimeout(() => navigate("/login"), 1500);
+    } catch (err) {
+      console.error(err);
+      setError("Error al registrarse. Revisá los datos.");
+    }
+  };
 
   return (
-    <div className="cursos-container">
-      <h1>Mis cursos</h1>
+    <div className="form-auth">
+      <h1>Crear cuenta</h1>
 
-      <div className="lista-cursos">
-        {cursos.map((curso) => {
-          const categoriaNormalizada = normalizarCategoria(curso.categoria);
+      {mensaje && <p className="mensaje-exito">{mensaje}</p>}
+      {error && <p className="mensaje-error">{error}</p>}
 
-          return (
-            <div key={curso._id} className="curso-card">
-              <img
-                src={
-                  curso.imagen ||
-                  imagenesPorCategoria[categoriaNormalizada] ||
-                  `https://picsum.photos/400/250?random=${curso._id}`
-                }
-                alt={curso.titulo}
-                className="curso-img"
-              />
+      <form onSubmit={handleRegister}>
+        <label>Nombre</label>
+        <input
+          type="text"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          required
+        />
 
-              <h3>{curso.titulo}</h3>
-              <p>{curso.descripcion}</p>
-            </div>
-          );
-        })}
-      </div>
+        <label>Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+
+        <label>Contraseña</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
+        <button type="submit" className="btn-hero">
+          Registrarme
+        </button>
+      </form>
     </div>
   );
 }

@@ -7,10 +7,13 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mensaje, setMensaje] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setMensaje("");
+    setError("");
 
     try {
       const res = await api.post("/usuarios/register", {
@@ -22,8 +25,8 @@ export default function Register() {
       setMensaje("Registro exitoso. Ahora podés iniciar sesión.");
       setTimeout(() => navigate("/login"), 1500);
     } catch (err) {
-      setMensaje("Error al registrarse. Revisá los datos.");
       console.error(err);
+      setError("Error al registrarse. Revisá los datos.");
     }
   };
 
@@ -32,6 +35,7 @@ export default function Register() {
       <h1>Crear cuenta</h1>
 
       {mensaje && <p className="mensaje-exito">{mensaje}</p>}
+      {error && <p className="mensaje-error">{error}</p>}
 
       <form onSubmit={handleRegister}>
         <label>Nombre</label>
