@@ -187,3 +187,18 @@ a {
 .form-auth button:hover {
   background: #3bb3d8;
 }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.saludo {
+  font-weight: bold;
+  color: #4caf50;
+  margin-left: 10px;
+}
+
+.btn-logout {
+  margin-left: 10px;
+}
