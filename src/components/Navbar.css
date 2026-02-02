@@ -1,39 +1,49 @@
-/* Contenedor de botones de login/register */
-.navbar-auth {
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+
+.nav-links {
   display: flex;
   align-items: center;
-  gap: 15px; /* ← SEPARA LOS BOTONES */
+  gap: 20px;
 }
 
-/* Botón Registrarse */
-.btn-register {
-  background: #4f46e5;
-  color: white;
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-size: 0.9rem;
+.nav-links a {
   text-decoration: none;
-  font-weight: 600;
-  transition: 0.2s;
-}
-
-.btn-register:hover {
-  background: #4338ca;
-}
-
-/* Botón Iniciar sesión */
-.btn-login {
-  background: white;
-  border: 1px solid #ccc;
   color: #333;
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.2s;
+  font-weight: 500;
 }
 
-.btn-login:hover {
-  border-color: #999;
+.nav-links a:hover {
+  color: #0077ff;
+}
+
+.saludo {
+  font-weight: bold;
+  color: #444;
+}
+
+.btn-logout {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-logout:hover {
+  background-color: #e60000;
 }

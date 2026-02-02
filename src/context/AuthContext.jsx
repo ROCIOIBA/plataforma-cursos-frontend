@@ -11,15 +11,15 @@ export const AuthProvider = ({ children }) => {
     const verificarSesion = async () => {
       try {
         const res = await api.get("/usuarios/perfil");
-        setUsuario(res.data);
+        setUsuario(res.data); // Usuario logueado
       } catch (error) {
-        setUsuario(null);
+        setUsuario(null); // No hay sesión
       } finally {
         setCargando(false);
       }
     };
 
-    verificarSesion(); // ✅ Esto está bien
+    verificarSesion();
   }, []);
 
   return (
