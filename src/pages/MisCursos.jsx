@@ -11,7 +11,7 @@ export default function MisCursos() {
 
   useEffect(() => {
     if (!cargando && !usuario) {
-      navigate("/register"); // ✅ corregido: era "/registrar"
+      navigate("/register");
     }
   }, [cargando, usuario, navigate]);
 
@@ -37,21 +37,23 @@ export default function MisCursos() {
   }
 
   if (!usuario) {
-    return null; // Ya redirigió, no renderiza nada
+    return null;
   }
 
   return (
-    <div className="mis-cursos">
+    <div className="mis-cursos-container">
       <h1>Mis Cursos</h1>
 
       {cursos.length === 0 ? (
         <p>No estás inscripta en ningún curso todavía.</p>
       ) : (
-        <ul>
+        <div className="lista-cursos">
           {cursos.map((curso) => (
-            <li key={curso._id}>{curso.titulo}</li>
+            <div className="curso-card" key={curso._id}>
+              <h3>{curso.titulo}</h3>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
