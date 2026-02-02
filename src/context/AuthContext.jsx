@@ -1,7 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../services/api";
-
-const AuthContext = createContext();
+import { AuthContext } from "./AuthContext";
 
 export const AuthProvider = ({ children }) => {
   const [usuario, setUsuario] = useState(null);
@@ -12,7 +11,7 @@ export const AuthProvider = ({ children }) => {
       try {
         const res = await api.get("/usuarios/perfil");
         setUsuario(res.data);
-      } catch (error) {
+      } catch {
         setUsuario(null);
       } finally {
         setCargando(false);
@@ -29,4 +28,3 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export const useAuth = () => useContext(AuthContext);

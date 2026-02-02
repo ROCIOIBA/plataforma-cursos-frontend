@@ -9,18 +9,12 @@ export default function MisCursos() {
   const [loadingCursos, setLoadingCursos] = useState(true);
   const navigate = useNavigate();
 
-  // Si todavía está cargando el usuario, mostramos loader
-  if (cargando) {
-    return <p>Cargando usuario...</p>;
-  }
+  useEffect(() => {
+    if (!cargando && !usuario) {
+      navigate("/register"); // ✅ corregido: era "/registrar"
+    }
+  }, [cargando, usuario, navigate]);
 
-  // Si terminó de cargar y NO hay usuario → redirigir
-  if (!usuario) {
-    navigate("/register");
-    return null;
-  }
-
-  // Cargar cursos del usuario
   useEffect(() => {
     const fetchCursos = async () => {
       try {
@@ -33,11 +27,17 @@ export default function MisCursos() {
       }
     };
 
-    fetchCursos();
-  }, []);
+    if (usuario) {
+      fetchCursos();
+    }
+  }, [usuario]);
 
-  if (loadingCursos) {
-    return <p>Cargando tus cursos...</p>;
+  if (cargando || (usuario && loadingCursos)) {
+    return <p>Cargando...</p>;
+  }
+
+  if (!usuario) {
+    return null; // Ya redirigió, no renderiza nada
   }
 
   return (
