@@ -1,51 +1,45 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
+  const { setUsuario } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [mensaje, setMensaje] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setMensaje("");
     setError("");
 
     try {
-      const res = await api.post("/usuarios/login", { email, password });
+      const res = await api.post("/usuarios/login", {
+        email,
+        password,
+      });
 
-      if (res.data.usuario) {
-        localStorage.setItem("user", JSON.stringify(res.data.usuario));
+      // El backend devuelve el usuario y setea la cookie
+      setUsuario(res.data.usuario);
 
-        setMensaje("Inicio de sesión exitoso");
-
-        setTimeout(() => {
-          navigate("/");
-        }, 1500);
-      } else {
-        setError("Credenciales incorrectas");
-      }
+      navigate("/mis-cursos");
     } catch (err) {
-      console.error("Error en login:", err);
-      setError("Error al iniciar sesión. Intenta nuevamente.");
+      console.error(err);
+      setError("Credenciales incorrectas o error en el servidor.");
     }
   };
 
   return (
     <div className="form-auth">
-      <h1>Iniciar sesión</h1>
+      <h1>Ingresar</h1>
 
-      {mensaje && <p className="mensaje-exito">{mensaje}</p>}
       {error && <p className="mensaje-error">{error}</p>}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLogin}>
         <label>Email</label>
         <input
           type="email"
-          placeholder="Correo"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -54,14 +48,13 @@ export default function Login() {
         <label>Contraseña</label>
         <input
           type="password"
-          placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
 
         <button type="submit" className="btn-hero">
-          Ingresar
+          Iniciar sesión
         </button>
       </form>
     </div>
