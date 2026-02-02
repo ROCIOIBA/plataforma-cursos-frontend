@@ -16,7 +16,7 @@ export default function MisCursos() {
 
   // Si terminó de cargar y NO hay usuario → redirigir
   if (!usuario) {
-    navigate("/registrar");
+    navigate("/register");
     return null;
   }
 
