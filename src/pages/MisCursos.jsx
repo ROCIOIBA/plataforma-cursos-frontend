@@ -1,71 +1,58 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import { useAuth } from "../context/AuthContext";
 
-export default function Register() {
-  const [nombre, setNombre] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [mensaje, setMensaje] = useState("");
-  const [error, setError] = useState("");
+export default function MisCursos() {
+  const { usuario, cargando } = useAuth();
+  const [cursos, setCursos] = useState([]);
+  const [loadingCursos, setLoadingCursos] = useState(true);
   const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    setMensaje("");
-    setError("");
+  // Si todavía está cargando el usuario, mostramos loader
+  if (cargando) {
+    return <p>Cargando usuario...</p>;
+  }
 
-    try {
-      const res = await api.post("/usuarios/register", {
-        nombre,
-        email,
-        password,
-      });
+  // Si terminó de cargar y NO hay usuario → redirigir
+  if (!usuario) {
+    navigate("/registrar");
+    return null;
+  }
 
-      setMensaje("Registro exitoso. Ahora podés iniciar sesión.");
-      setTimeout(() => navigate("/login"), 1500);
-    } catch (err) {
-      console.error(err);
-      setError("Error al registrarse. Revisá los datos.");
-    }
-  };
+  // Cargar cursos del usuario
+  useEffect(() => {
+    const fetchCursos = async () => {
+      try {
+        const res = await api.get("/inscripciones/mis-cursos");
+        setCursos(res.data);
+      } catch (error) {
+        console.error("Error al cargar cursos:", error);
+      } finally {
+        setLoadingCursos(false);
+      }
+    };
+
+    fetchCursos();
+  }, []);
+
+  if (loadingCursos) {
+    return <p>Cargando tus cursos...</p>;
+  }
 
   return (
-    <div className="form-auth">
-      <h1>Crear cuenta</h1>
+    <div className="mis-cursos">
+      <h1>Mis Cursos</h1>
 
-      {mensaje && <p className="mensaje-exito">{mensaje}</p>}
-      {error && <p className="mensaje-error">{error}</p>}
-
-      <form onSubmit={handleRegister}>
-        <label>Nombre</label>
-        <input
-          type="text"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-          required
-        />
-
-        <label>Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-
-        <label>Contraseña</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-
-        <button type="submit" className="btn-hero">
-          Registrarme
-        </button>
-      </form>
+      {cursos.length === 0 ? (
+        <p>No estás inscripta en ningún curso todavía.</p>
+      ) : (
+        <ul>
+          {cursos.map((curso) => (
+            <li key={curso._id}>{curso.titulo}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
