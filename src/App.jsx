@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";   // ⭐ FALTABA ESTO
+import Footer from "./components/Footer";
 import Dashboard from "./pages/Dashboard";
 
 import Home from "./pages/Home";
@@ -13,7 +13,7 @@ import Register from "./pages/Register";
 
 export default function App() {
   return (
-    <Router>
+    <>
       <Navbar />
 
       <Routes>
@@ -24,10 +24,9 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
-
       </Routes>
 
-      <Footer />   {/* Ahora sí funciona */}
-    </Router>
+      <Footer />
+    </>
   );
 }
