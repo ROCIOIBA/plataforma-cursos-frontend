@@ -9,7 +9,7 @@ export default function MisCursos() {
     const obtenerMisCursos = async () => {
       try {
         const res = await api.get("/usuarios/mis-cursos");
-        setCursos(res.data.cursos || []);
+        setCursos(res.data || []); // ← CORREGIDO
       } catch (error) {
         console.error("Error al obtener mis cursos:", error);
       } finally {
