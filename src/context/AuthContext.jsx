@@ -2,8 +2,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../services/api";
 
+// ✅ Crear el contexto
 const AuthContext = createContext();
 
+// ✅ Provider que envuelve la app
 export const AuthProvider = ({ children }) => {
   const [usuario, setUsuario] = useState(null);
   const [cargando, setCargando] = useState(true);
@@ -40,4 +42,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+// ✅ Hook para acceder al contexto
 export const useAuth = () => useContext(AuthContext);
