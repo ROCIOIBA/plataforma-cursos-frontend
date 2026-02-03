@@ -23,18 +23,8 @@ export const AuthProvider = ({ children }) => {
     verificarSesion();
   }, []);
 
-  const logout = async () => {
-    try {
-      await api.post("/usuarios/logout");
-    } catch (error) {
-      console.error("Error al cerrar sesión:", error);
-    } finally {
-      setUsuario(null);
-    }
-  };
-
   return (
-    <AuthContext.Provider value={{ usuario, setUsuario, cargando, logout }}>
+    <AuthContext.Provider value={{ usuario, setUsuario, cargando }}>
       {children}
     </AuthContext.Provider>
   );
