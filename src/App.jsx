@@ -1,6 +1,4 @@
-
-
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import RutaPrivada from "./components/RutaPrivada";
@@ -13,7 +11,7 @@ import Register from "./pages/Register";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <>
       <Navbar />
 
       <Routes>
@@ -34,6 +32,6 @@ export default function App() {
       </Routes>
 
       <Footer />
-    </BrowserRouter>
+    </>
   );
 }
