@@ -230,3 +230,5 @@ body.dark .form-auth {
   font-weight: bold;
   color: #4caf50;
 }
+.btn-logout { margin-left: 12px; /* separa el botón del saludo */
+}
