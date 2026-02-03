@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import api from "../services/api";
 
 function normalizarCategoria(cat) {
   if (!cat) return "";
@@ -23,9 +24,9 @@ export default function Dashboard() {
   const [cursos, setCursos] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/cursos")
-      .then((res) => res.json())
-      .then((data) => setCursos(data))
+    api
+      .get("/cursos")
+      .then((res) => setCursos(res.data))
       .catch((err) => console.error("Error cargando cursos:", err));
   }, []);
 
