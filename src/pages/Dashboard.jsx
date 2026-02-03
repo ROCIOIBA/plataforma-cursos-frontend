@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-// Normaliza categorías
 function normalizarCategoria(cat) {
   if (!cat) return "";
   return cat
@@ -9,7 +8,6 @@ function normalizarCategoria(cat) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-// Imágenes por categoría
 const imagenesPorCategoria = {
   programacion: "https://images.unsplash.com/photo-1518770660439-4636190af475",
   diseno: "https://images.unsplash.com/photo-1503602642458-232111445657",
@@ -32,24 +30,12 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="dashboard-container" style={{ padding: "40px" }}>
+    <div className="page-container">
       <h1>Panel de Administración</h1>
 
-      <button
-        style={{
-          margin: "20px 0",
-          padding: "10px 20px",
-          background: "#4f46e5",
-          color: "white",
-          borderRadius: "8px",
-          border: "none",
-          cursor: "pointer",
-        }}
-      >
-        + Agregar Curso
-      </button>
+      <button className="btn-admin-add">+ Agregar Curso</button>
 
-      <div className="lista-cursos">
+      <div className="cursos-grid">
         {cursos.map((curso) => {
           const categoriaNormalizada = normalizarCategoria(curso.categoria);
 
@@ -70,19 +56,7 @@ export default function Dashboard() {
               <p><strong>Categoría:</strong> {curso.categoria}</p>
               <p><strong>Profesor:</strong> {curso.profesor}</p>
 
-              <button
-                style={{
-                  marginTop: "10px",
-                  padding: "8px 15px",
-                  background: "#ef4444",
-                  color: "white",
-                  borderRadius: "6px",
-                  border: "none",
-                  cursor: "pointer",
-                }}
-              >
-                Eliminar
-              </button>
+              <button className="btn-admin-delete">Eliminar</button>
             </div>
           );
         })}

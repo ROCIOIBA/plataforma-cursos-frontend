@@ -1,32 +1,14 @@
-import { Routes, Route } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Dashboard from "./pages/Dashboard";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import { BrowserRouter } from "react-router-dom";
+import "./styles.css"; // ← IMPORTANTE: carga tus estilos globales
 
-import Home from "./pages/Home";
-import Cursos from "./pages/Cursos";
-import CursoDetalle from "./pages/CursoDetalle";
-import MisCursos from "./pages/MisCursos";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-
-export default function App() {
-  return (
-    <>
-      <Navbar />
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cursos" element={<Cursos />} />
-        <Route path="/curso/:id" element={<CursoDetalle />} />
-        <Route path="/mis-cursos" element={<MisCursos />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-
-      <Footer />
-    </>
-  );
-}
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);

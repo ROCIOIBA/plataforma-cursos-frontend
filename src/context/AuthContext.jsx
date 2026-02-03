@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../services/api";
 
@@ -11,9 +12,9 @@ export const AuthProvider = ({ children }) => {
     const verificarSesion = async () => {
       try {
         const res = await api.get("/usuarios/perfil");
-        setUsuario(res.data); // Usuario logueado
-      } catch (error) {
-        setUsuario(null); // No hay sesión
+        setUsuario(res.data);
+      } catch {
+        setUsuario(null);
       } finally {
         setCargando(false);
       }
@@ -22,14 +23,21 @@ export const AuthProvider = ({ children }) => {
     verificarSesion();
   }, []);
 
+  const logout = async () => {
+    try {
+      await api.post("/usuarios/logout");
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    } finally {
+      setUsuario(null);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ usuario, setUsuario, cargando }}>
+    <AuthContext.Provider value={{ usuario, setUsuario, cargando, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
 export const useAuth = () => useContext(AuthContext);
-
-
-;

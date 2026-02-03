@@ -1,26 +1,12 @@
-import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import api from "../services/api";
+import { useAuth } from "../context/AuthContext";
 
 export default function RutaPrivada({ children }) {
-  const [cargando, setCargando] = useState(true);
-  const [autenticado, setAutenticado] = useState(false);
-
-  useEffect(() => {
-    api.get("/usuarios/me") // ⭐ Debes tener esta ruta en backend
-      .then(() => {
-        setAutenticado(true);
-        setCargando(false);
-      })
-      .catch(() => {
-        setAutenticado(false);
-        setCargando(false);
-      });
-  }, []);
+  const { usuario, cargando } = useAuth();
 
   if (cargando) return <p>Cargando...</p>;
 
-  if (!autenticado) {
+  if (!usuario) {
     return <Navigate to="/login" replace />;
   }
 

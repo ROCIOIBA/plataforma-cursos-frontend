@@ -119,28 +119,110 @@ a {
 
 .beneficios-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-  margin-top: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
 }
 
-.beneficio-card {
+.beneficio-item {
   background: white;
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease;
 }
 
-.beneficio-card:hover {
-  transform: translateY(-5px);
+.beneficio-item h3 {
+  margin-bottom: 10px;
+  color: #4361ee;
+}
+
+/* ===========================
+   CURSOS GRID
+=========================== */
+
+.cursos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 40px;
+}
+
+.curso-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.curso-card h3 {
+  margin-bottom: 5px;
+}
+
+.curso-card button {
+  margin-top: auto;
+  padding: 10px 16px;
+  background: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.curso-card button:hover {
+  background: #3048c0;
+}
+
+/* ===========================
+   DETALLE DEL CURSO
+=========================== */
+
+.page-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.course-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.course-card .category {
+  font-style: italic;
+  color: #777;
+}
+
+.course-card .error {
+  color: red;
+  font-weight: bold;
+}
+
+.course-card button {
+  padding: 12px 20px;
+  background: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.course-card button:hover {
+  background: #3048c0;
 }
 
 /* ===========================
    FOOTER
 =========================== */
 
-.footer {
+footer {
   background: #1e1e2f;
   color: white;
   text-align: center;
@@ -149,86 +231,214 @@ a {
 }
 
 /* ===========================
-   ANIMACIONES
+   FORMULARIOS DE AUTENTICACIÓN
 =========================== */
 
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+.form-auth {
+  max-width: 450px;
+  margin: 60px auto;
+  background: white;
+  padding: 35px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  text-align: center;
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.form-auth h1 {
+  margin-bottom: 20px;
+  color: #4361ee;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.form-auth-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-auth label {
+  text-align: left;
+  font-weight: 600;
+}
+
+.form-auth input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.mensaje-error {
+  color: #ff4d4d;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.mensaje-exito {
+  color: #2ecc71;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 /* ===========================
-   MODO OSCURO
+   IMÁGENES DE CURSOS
 =========================== */
 
-body.dark {
-  background: #121212;
-  color: #e5e5e5;
-}
-
-body.dark .navbar {
-  background: #0d0d0d;
-}
-
-body.dark .footer {
-  background: #0d0d0d;
-}
-
-body.dark .beneficio-card,
-body.dark .curso-card,
-body.dark .curso-detalle,
-body.dark .form-auth {
-  background: #1e1e1e;
-  color: #e5e5e5;
-}
 .curso-img {
   width: 100%;
-  height: 160px;
+  height: 180px;
   object-fit: cover;
   border-radius: 10px;
-  margin-bottom: 12px;
-}
-.dashboard {
-  padding: 40px;
 }
 
-.dashboard h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
+.curso-detalle-img {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 20px;
 }
 
-.dashboard h2 {
-  margin-top: 30px;
-}
-.mensaje-exito {
-  background: #4caf50;
+/* ===========================
+   BOTÓN "VER MÁS"
+=========================== */
+
+.btn-detalle {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #4361ee;
   color: white;
-  padding: 12px;
-  margin-bottom: 15px;
-  border-radius: 6px;
+  border-radius: 8px;
   text-align: center;
-  font-weight: bold;
-  animation: fadeIn 0.3s ease-in-out;
+  font-weight: 600;
+  margin-top: auto;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
+.btn-detalle:hover {
+  background: #3048c0;
 }
-.saludo {
-  margin-right: 12px;
-  font-weight: bold;
-  color: #4caf50;
+
+/* ===========================
+   COMPATIBILIDAD (por si algún componente viejo lo usa)
+=========================== */
+
+.mis-cursos-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
 }
-.btn-logout { margin-left: 12px; /* separa el botón del saludo */
+
+.lista-cursos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+/* ===========================
+   DASHBOARD ADMIN
+=========================== */
+
+.btn-admin-add {
+  margin: 20px 0;
+  padding: 12px 20px;
+  background: #4f46e5;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.btn-admin-add:hover {
+  background: #3b36c7;
+}
+
+.btn-admin-delete {
+  margin-top: 10px;
+  padding: 10px 16px;
+  background: #ef4444;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-admin-delete:hover {
+  background: #d62828;
+}
+/* ===========================
+   HOME HERO
+=========================== */
+
+.home-hero {
+  padding: 100px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+}
+
+.hero-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+/* ===========================
+   BENEFICIOS
+=========================== */
+
+.beneficio-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* ===========================
+   TESTIMONIOS
+=========================== */
+
+.testimonios {
+  padding: 60px 20px;
+  background: #f9fafb;
+}
+
+.testimonio-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* ===========================
+   CONTACTO
+=========================== */
+
+.contacto {
+  padding: 60px 20px;
+  background: white;
+  text-align: center;
+}
+
+.contacto-descripcion {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.contacto-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  font-size: 18px;
 }
