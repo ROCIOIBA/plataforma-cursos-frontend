@@ -39,13 +39,19 @@ a {
 
 .nav-links {
   display: flex;
-  gap: 20px;
   align-items: center;
+  gap: 20px; /* SEPARA LOS ELEMENTOS */
 }
 
 .nav-links a {
   color: white;
   font-weight: 500;
+}
+
+.saludo {
+  font-weight: bold;
+  color: #4caf50;
+  margin: 0 12px; /* SEPARA EL SALUDO */
 }
 
 .btn-logout {
@@ -56,6 +62,7 @@ a {
   color: white;
   cursor: pointer;
   font-weight: bold;
+  margin-left: 12px; /* SEPARA EL BOTÓN */
 }
 
 .btn-logout:hover {
@@ -186,19 +193,4 @@ a {
 
 .form-auth button:hover {
   background: #3bb3d8;
-}
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.saludo {
-  font-weight: bold;
-  color: #4caf50;
-  margin-left: 10px;
-}
-
-.btn-logout {
-  margin-left: 10px;
 }
