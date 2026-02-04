@@ -1,58 +1,69 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import api from "../services/api";
 
-export default function CursoDetalle() {
-  const { id } = useParams();
-  const [curso, setCurso] = useState(null);
-  const [mensaje, setMensaje] = useState("");
+function normalizarCategoria(cat) {
+  if (!cat) return "";
+  return cat
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // quita tildes
+    .replace(/\s+/g, ""); // quita espacios
+}
+
+const imagenesPorCategoria = {
+  programacion: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+  disenoweb: "https://images.unsplash.com/photo-1503602642458-232111445657",
+  basesdedatos: "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
+};
+
+export default function Cursos() {
+  const [cursos, setCursos] = useState([]);
+  const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
     api
-      .get(`/cursos/${id}`)
-      .then((res) => setCurso(res.data))
-      .catch((err) => console.error("Error cargando curso:", err));
-  }, [id]);
+      .get("/cursos")
+      .then((res) => setCursos(res.data))
+      .catch((err) => console.error("Error cargando cursos:", err))
+      .finally(() => setCargando(false));
+  }, []);
 
-  const inscribirse = () => {
-    api
-      .post(`/inscripciones/${id}`)
-      .then(() => setMensaje("Te inscribiste correctamente"))
-      .catch(() => setMensaje("Error al inscribirse"));
-  };
-
-  if (!curso) return <p>Cargando...</p>;
+  if (cargando) return <p>Cargando cursos...</p>;
 
   return (
     <div className="page-container">
-      <div className="course-card">
-        {curso.imagen && (
-          <img
-            src={curso.imagen}
-            alt={curso.titulo}
-            className="curso-detalle-img"
-            style={{
-              width: "100%",
-              borderRadius: "10px",
-              marginBottom: "20px",
-            }}
-          />
-        )}
+      <h1>Cursos Disponibles</h1>
 
-        <h1>{curso.titulo}</h1>
-        <p>{curso.descripcion}</p>
+      <div className="cursos-grid">
+        {cursos.map((curso) => {
+          const categoria = normalizarCategoria(curso.categoria);
 
-        <p className="category">
-          <strong>Categoría:</strong> {curso.categoria}
-        </p>
+          return (
+            <Link
+              key={curso._id}
+              to={`/cursos/${curso._id}`}
+              className="curso-card"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <img
+                src={
+                  curso.imagen ||
+                  imagenesPorCategoria[categoria] ||
+                  `https://picsum.photos/400/250?random=${curso._id}`
+                }
+                alt={curso.titulo}
+                className="curso-img"
+              />
 
-        {mensaje && <p className="mensaje-exito">{mensaje}</p>}
-
-        <button className="btn-hero" onClick={inscribirse}>
-          Inscribirme
-        </button>
+              <h3>{curso.titulo}</h3>
+              <p>{curso.descripcion}</p>
+              <p><strong>Categoría:</strong> {curso.categoria}</p>
+              <p><strong>Profesor:</strong> {curso.profesor}</p>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
 }
-
