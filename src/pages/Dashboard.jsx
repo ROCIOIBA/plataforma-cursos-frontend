@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../services/api";
 
 function normalizarCategoria(cat) {
@@ -41,7 +42,12 @@ export default function Dashboard() {
           const categoriaNormalizada = normalizarCategoria(curso.categoria);
 
           return (
-            <div key={curso._id} className="curso-card">
+            <Link
+              key={curso._id}
+              to={`/cursos/${curso._id}`}
+              className="curso-card"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <img
                 src={
                   curso.imagen ||
@@ -56,9 +62,7 @@ export default function Dashboard() {
               <p>{curso.descripcion}</p>
               <p><strong>Categoría:</strong> {curso.categoria}</p>
               <p><strong>Profesor:</strong> {curso.profesor}</p>
-
-              <button className="btn-admin-delete">Eliminar</button>
-            </div>
+            </Link>
           );
         })}
       </div>
