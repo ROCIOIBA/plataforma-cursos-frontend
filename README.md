@@ -1,88 +1,125 @@
-📘 Plataforma de Cursos – Frontend
+🌐 Plataforma de Cursos – Frontend
 
-Aplicación frontend desarrollada con React y Vite para consumir la API de la Plataforma de Cursos. Permite a los usuarios visualizar cursos, registrarse, iniciar sesión y navegar por la plataforma de manera intuitiva y responsiva.
+Interfaz web desarrollada por Rocío Ibañez, Fullstack Developer.
+
+Este frontend permite a los usuarios navegar cursos, ver detalles, inscribirse, gestionar su perfil y acceder a sus cursos.
+Construido con React, integra autenticación con cookies y consume la API REST desplegada en Render.
 
 🚀 Tecnologías utilizadas
-
 React
 
-Vite
+React Router DOM
 
-React Router
+Axios
 
-CSS / Tailwind / estilos propios (adaptar según tu proyecto)
+Context API (autenticación)
 
-Fetch / Axios para consumir la API
+CSS puro
 
-Node + Express (backend conectado)
+Vite (entorno de desarrollo)
 
 📦 Instalación y ejecución
 
 1. Clonar el repositorio
 bash
 git clone https://github.com/ROCIOIBA/plataforma-cursos-frontend.git
-
 2. Instalar dependencias
 bash
 npm install
-
 3. Configurar variables de entorno
-Crear un archivo .env en la raíz del proyecto:
+Crear un archivo .env en la raíz:
 
 Código
-VITE_API_URL=http://localhost:3000
-(Una vez que el backend esté desplegado, reemplazar por la URL pública de Render.)
+VITE_API_URL=https://plataforma-cursos-backend-4o3v.onrender.com/api
 
 4. Ejecutar el proyecto
 
 bash
 npm run dev
-La aplicación estará disponible en:
+Frontend disponible en:
 
 Código
+
 http://localhost:5173
 
 🧩 Funcionalidades principales
+👤 Autenticación
+Registro
 
-Registro de usuarios
+Login
 
-Inicio de sesión
+Logout
 
-Visualización de cursos
+Sesiones con cookies httpOnly
 
-Navegación por secciones
+Context global de usuario
 
-Consumo de API REST
+Rutas protegidas
 
-Manejo de estados y rutas
+📚 Cursos
+Listado de cursos
 
-🔗 Conexión con el backend
+Detalle de curso
 
-Este frontend consume la API desarrollada en:
+Imágenes dinámicas por categoría
 
-Código
-https://github.com/ROCIOIBA/plataforma-cursos-backend
-(Agregar URL del deploy cuando esté lista.)
+Inscripción a cursos
 
-📁 Estructura del proyecto
+📝 Mis Cursos
+Ver cursos en los que el usuario está inscrito
+
+Acceso solo para usuarios autenticados
+
+👤 Perfil
+Ver datos del usuario
+
+Validación de sesión
+
+🗂️ Estructura del proyecto
 
 Código
 src/
-  components/       # Componentes reutilizables (Navbar, Footer, etc.)
-  pages/            # Vistas principales (Home, Cursos, Login, etc.)
-  services/         # Funciones para consumir la API
-  hooks/            # Custom hooks si usás alguno
-  App.jsx           # Componente raíz
-  main.jsx          # Punto de entrada
-public/
-  index.html        # HTML base
+  components/        # Navbar, Footer, RutaPrivada, etc.
+  pages/             # Home, Cursos, CursoDetalle, MisCursos, Login, Register, Perfil
+  context/           # AuthContext (manejo de sesión)
+  services/          # api.js (axios configurado)
+  styles.css         # Estilos globales
+  App.jsx            # Rutas principales
+  main.jsx           # Punto de entrada
+🔗 Conexión con el backend
+El frontend consume la API desplegada en Render:
+
+Código
+https://plataforma-cursos-backend-4o3v.onrender.com/api
+Todas las solicitudes se realizan mediante Axios desde:
+
+Código
+src/services/api.js
+Incluye:
+
+withCredentials: true para enviar cookies
+
+Base URL configurable por .env
+
+🧪 Pruebas
+Navegación completa
+
+Autenticación
+
+Inscripción a cursos
+
+Acceso a rutas protegidas
+
+Manejo de errores
+
+Integración con backend en producción
 
 🌐 Deploy
+Frontend desplegado en Render:
+
+Código
 https://plataforma-cursos-frontend-kfm6.onrender.com
 
-
-
-
-
-# Plataforma de Cursos – Frontend
-Proyecto desarrollado por **Rocío Ibañez**, Backend .
+👩‍💻 Autora
+Desarrollado por Rocío Ibañez  
+Frontend & Backend Developer
